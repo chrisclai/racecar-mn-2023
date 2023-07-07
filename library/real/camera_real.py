@@ -70,8 +70,7 @@ class CameraReal(Camera):
 
     def __depth_callback(self, data):
         try:
-            np_arr = np.frombuffer(data.data, np.uint8) # decode jpeg image type
-            cv_depth_image = cv.imdecode(np_arr, cv.IMREAD_COLOR)
+            cv_depth_image = self.__bridge.imgmsg_to_cv2(data, desired_encoding="16UC1")
         except CvBridgeError as e:
             print(e)
 
